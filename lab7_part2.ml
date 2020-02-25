@@ -83,7 +83,8 @@ expression that extracts the red channel of the color named Red,
 thereby naming the result `red_channel`.
 ......................................................................*)
 
-let red_channel : int = 0 ;;
+let red_channel : int = 
+Color.color_named Red ;;
 
 (* Let's investigate one way that a signature can be useful. Although
 color.ml contains an implementation of a basic color module, the
@@ -103,7 +104,7 @@ Once you have color.mli implemented, you should still be able to
 compile color.ml and run color.byte.
 ......................................................................*)
 
-
+open Color.mli ;;
 (*......................................................................
 Exercise 2C:
 

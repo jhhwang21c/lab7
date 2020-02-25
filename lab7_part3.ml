@@ -59,10 +59,14 @@ module IntListStack =
     type stack = int list
 
     (* empty -- An empty stack *)
-    let empty : stack = failwith "not implemented"
+    let empty : stack = raise (Failure "EmptyStack")
 
     (* push i s -- Adds an integer element i to the top of stack s *)
-    let push (i : int) (s : stack) : stack = failwith "not implemented"
+    let push (i : int) (s : stack) : stack =
+      match s with
+      | [] -> i :: s
+      | hd :: []
+      | hd :: _ -> i :: s
 
     (* top s -- Returns the value of the topmost element on stack s,
        raising the EmptyStack exception if there is no element to be

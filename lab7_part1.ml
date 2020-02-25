@@ -55,13 +55,19 @@ IEEE Floating Point standard described at
 temporary value pending your putting in appropriate ones.)
 ......................................................................*)
 
+let my_max (list : float list) : float option =
+  match list with
+  | [] -> None
+  | hd :: tl -> Some (List.fold_left max hd tl)
+;;
+
 module Math : MATH =
   struct
-    let pi = nan
-    let cos _ = nan
-    let sin _ = nan
-    let sum _ _ = nan
-    let max _ = None
+    let pi = 3.14159265359
+    let cos num = cos num
+    let sin num = sin num
+    let sum x y = x +. y
+    let max lst = my_max lst
   end ;;
 
 (*......................................................................
@@ -71,7 +77,8 @@ type float option. Name the resulting value `result`. (Use explicit
 module prefixes for this exercise, not global or local opens.)
 ......................................................................*)
 
-let result = Some nan ;;
+let result =
+Math.max [Math.cos Math.pi; Math.sin Math.pi] ;;
 
 (*......................................................................
 Exercise 1C: Reimplement the computation from 1B above, now as
@@ -79,4 +86,6 @@ Exercise 1C: Reimplement the computation from 1B above, now as
 in a more succinct manner.
 ......................................................................*)
 
-let result_local_open = Some nan ;;
+let result_local_open = 
+let open Math in 
+max [cos pi; sin pi] ;;
